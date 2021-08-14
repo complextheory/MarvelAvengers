@@ -25,7 +25,7 @@ class HeroAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        Log.wtf("Coming From Adapter", "Adapter")
+        Log.i("Coming From Adapter", "Adapter")
 
         return ViewHolder(
             ItemViewHeroBinding.inflate(

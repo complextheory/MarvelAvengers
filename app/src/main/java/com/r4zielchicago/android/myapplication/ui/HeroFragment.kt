@@ -28,10 +28,7 @@ class HeroFragment: Fragment() {
     private val networkService = NetworkService()
     private val retrofit = networkService.getRetrofitInstance()
     private val characterApi = retrofit.create(HeroesApi::class.java)
-    private lateinit var matchedHeroList: MutableList<Hero>
-    private lateinit var tempHeroList: MutableList<Hero>
-
-
+    private var matchedHeroList = mutableListOf<Hero>()
 
     private val characterItemClickListener = object: HeroClickListener {
         override fun onHeroClicked(hero: Hero) {
@@ -79,15 +76,11 @@ class HeroFragment: Fragment() {
         viewModel.heroLiveData.observe(viewLifecycleOwner, Observer {
             it?.let { heroes ->
 
-                tempHeroList = arrayListOf()
-                tempHeroList.clear()
-                tempHeroList.addAll(heroes)
-
                 heroAdapter.update(heroes)
 
                 performSearch()
 
-                Log.wtf("Coming From Fragment", "Character Name is: ${heroes[0].name},"
+                Log.i("Coming From Fragment", "Character Name is: ${heroes[0].name},"
                         + " Character # of Comics Available in List is: ${heroes[0].comics.available},"
                         + " Character Comics Uri is: ${heroes[0].comics.collectionURI},"
                         + " Character 1st Comic Name in List is: ${heroes[0].comics.items[0].name},"
@@ -124,7 +117,7 @@ class HeroFragment: Fragment() {
         //TODO Limit to searches where the query length is > 0
 
         text?.let {
-            tempHeroList.forEach { hero ->
+            viewModel.heroList.forEach { hero ->
                 if (hero.name.contains(text, true)){
                     matchedHeroList.add(hero)
                 }

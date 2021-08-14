@@ -4,7 +4,6 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.r4zielchicago.android.myapplication.api.entity.Data
 import com.r4zielchicago.android.myapplication.api.entity.Hero
 import com.r4zielchicago.android.myapplication.repository.HeroRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -15,7 +14,7 @@ class HeroViewModel(private val heroRepository: HeroRepository) : ViewModel() {
 
     val heroLiveData = MutableLiveData<List<Hero>>()
     val tempHeroListLiveData = MutableLiveData<List<Hero>>()
-    private val tempHeroList = mutableListOf<Hero>()
+    val heroList = mutableListOf<Hero>()
     private var isListSortedAscending: Boolean = true
 
     fun fetchHeroes() {
@@ -24,31 +23,28 @@ class HeroViewModel(private val heroRepository: HeroRepository) : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    heroLiveData.value = it?.data?.heroes
-                    tempHeroList.clear()
-                    heroLiveData.value?.forEach {  hero ->
-                        tempHeroList.add(hero)
-                    }
+                    val heroes = it?.data?.heroes ?: emptyList()
+                    heroLiveData.value = heroes
+                    tempHeroListLiveData.value = heroes
+                    heroList.clear()
+                    heroList.addAll(heroes)
                 },
                 {
                     heroLiveData.value = emptyList()
+                    tempHeroListLiveData.value = emptyList()
+                    heroList.clear()
                     onError(it)
                 }
             )
     }
 
-    fun handleClick(view: View) {
-        Log.wtf("Coming From HandleClick", "Handling Click")
+    fun onSortClicked(view: View) {
+        Log.i("Coming From HandleClick", "Handling Click")
 
-        isListSortedAscending = if (isListSortedAscending) {
-            tempHeroList.sortByDescending { it.name }
-            false
-        }else{
-            tempHeroList.sortBy { it.name }
-            true
-        }
+        isListSortedAscending = !isListSortedAscending
+        if (isListSortedAscending) heroList.sortBy { it.name }
+        else heroList.sortByDescending { it.name }
 
-//        tempHeroListLiveData.value = tempHeroList
-        tempHeroListLiveData.postValue(tempHeroList)
+        tempHeroListLiveData.postValue(heroList)
     }
 }
