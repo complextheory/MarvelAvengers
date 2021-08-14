@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <!-- We will be passing a Product object named 'product' and
+    we will call its fields to populate our layout -->
+        <variable
+            name="hero"
+            type="com.r4zielchicago.android.myapplication.api.entity.Hero" />
+        <!-- We will be passing a ProductItemClickListener object called
+    'productItemClick' and we will use this for managing list item clicks-->
+        <variable
+            name="heroItemClick"
+            type="com.r4zielchicago.android.myapplication.utilities.HeroClickListener" />
+    </data>
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="6dp"
+        android:onClick="@{() -> heroItemClick.onHeroClicked(hero)}">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:id="@+id/iv_character_thumbnail"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_character_name"
+                android:textSize="18sp"
+                android:padding="6dp"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
+
