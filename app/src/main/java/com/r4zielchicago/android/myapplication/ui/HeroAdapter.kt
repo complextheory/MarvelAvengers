@@ -12,10 +12,16 @@ import com.r4zielchicago.android.myapplication.databinding.ItemViewHeroBinding
 import com.r4zielchicago.android.myapplication.utilities.HeroClickListener
 
 class HeroAdapter(
-    private val heroes: List<Hero> = emptyList(),
     private val heroListener: HeroClickListener
 ) : RecyclerView.Adapter<HeroAdapter.ViewHolder>() {
 
+    private val heroes: MutableList<Hero> = mutableListOf()
+
+    fun update(data: List<Hero>){
+        heroes.clear()
+        heroes.addAll(data)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 

@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.r4zielchicago.android.myapplication.api.HeroesApi
 import com.r4zielchicago.android.myapplication.api.entity.Hero
 import com.r4zielchicago.android.myapplication.api.entity.MarvelResult
@@ -29,6 +28,7 @@ class HeroFragment: Fragment() {
     private val characterApi = retrofit.create(HeroesApi::class.java)
     private lateinit var matchedResultList: MutableList<MarvelResult>
 
+
     private val characterItemClickListener = object: HeroClickListener {
         override fun onHeroClicked(hero: Hero) {
 
@@ -36,6 +36,8 @@ class HeroFragment: Fragment() {
             Toast.makeText(requireContext(), hero.name, Toast.LENGTH_SHORT).show()
         }
     }
+
+    private val heroAdapter = HeroAdapter(heroListener = characterItemClickListener)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,11 +47,12 @@ class HeroFragment: Fragment() {
         //TODO Move out
         viewModelFactory = ViewModelFactory(characterApi)
 
-
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(HeroViewModel::class.java)
 
         binding = FragmentHeroBinding.inflate(inflater, container, false)
+
+        binding.rvCharacterList.adapter = heroAdapter
 
         return binding.root
     }
@@ -69,20 +72,7 @@ class HeroFragment: Fragment() {
         viewModel.heroLiveData.observe(viewLifecycleOwner, Observer {
             it?.let { heroes ->
 
-                binding.apply {
-
-//                    characterViewModel = viewModel
-//                    setLifecycleOwner {lifecycle}
-//                    executePendingBindings()
-
-                    //TODO SET THESE IN XML
-                    rvCharacterList.setHasFixedSize(true)
-                    rvCharacterList.layoutManager = LinearLayoutManager(activity)
-
-                    rvCharacterList.adapter = HeroAdapter(heroes, characterItemClickListener)
-                }
-
-
+                heroAdapter.update(heroes)
 
                 Log.wtf("Coming From Fragment", "Character Name is: ${heroes[0].name},"
                         + " Character # of Comics Available in List is: ${heroes[0].comics.available},"
