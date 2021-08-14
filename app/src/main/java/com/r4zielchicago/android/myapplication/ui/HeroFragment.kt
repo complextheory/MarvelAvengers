@@ -17,6 +17,7 @@ import com.r4zielchicago.android.myapplication.databinding.FragmentHeroBinding
 import com.r4zielchicago.android.myapplication.factory.ViewModelFactory
 import com.r4zielchicago.android.myapplication.network.NetworkService
 import com.r4zielchicago.android.myapplication.utilities.HeroClickListener
+import java.security.acl.Owner
 
 class HeroFragment: Fragment() {
 
@@ -28,7 +29,7 @@ class HeroFragment: Fragment() {
     private val retrofit = networkService.getRetrofitInstance()
     private val characterApi = retrofit.create(HeroesApi::class.java)
     private lateinit var matchedHeroList: MutableList<Hero>
-    private var tempHeroList = mutableListOf<Hero>()
+    private lateinit var tempHeroList: MutableList<Hero>
 
 
 
@@ -54,6 +55,7 @@ class HeroFragment: Fragment() {
             .get(HeroViewModel::class.java)
 
         binding = FragmentHeroBinding.inflate(inflater, container, false)
+        binding.viewModel = viewModel
 
         binding.rvCharacterList.adapter = heroAdapter
         binding.characterSearchView.isSubmitButtonEnabled = true
@@ -77,13 +79,13 @@ class HeroFragment: Fragment() {
         viewModel.heroLiveData.observe(viewLifecycleOwner, Observer {
             it?.let { heroes ->
 
+                tempHeroList = arrayListOf()
                 tempHeroList.clear()
                 tempHeroList.addAll(heroes)
 
                 heroAdapter.update(heroes)
 
                 performSearch()
-
 
                 Log.wtf("Coming From Fragment", "Character Name is: ${heroes[0].name},"
                         + " Character # of Comics Available in List is: ${heroes[0].comics.available},"
@@ -92,6 +94,12 @@ class HeroFragment: Fragment() {
                         + " Character 1st Comic Uri in List is: ${heroes[0].comics.items[0].resourceURI},"
                         + " Character # of Series Available in List is: ${heroes[0].series.available},"
                         + " Character # of Events Available in List is: ${heroes[0].events.available}")
+            }
+        })
+        binding.viewModel?.tempHeroListLiveData?.observe(viewLifecycleOwner, Observer {
+            it?.let { heroes ->
+
+                heroAdapter.update(heroes)
             }
         })
     }
@@ -111,7 +119,9 @@ class HeroFragment: Fragment() {
     }
 
     private fun search(text: String?) {
-        matchedHeroList = arrayListOf()
+        matchedHeroList = mutableListOf()
+
+        //TODO Limit to searches where the query length is > 0
 
         text?.let {
             tempHeroList.forEach { hero ->
@@ -119,7 +129,6 @@ class HeroFragment: Fragment() {
                     matchedHeroList.add(hero)
                 }
             }
-            heroAdapter.update(matchedHeroList)
             if (matchedHeroList.isEmpty()) {
                 Toast.makeText(requireContext(), "No match found!", Toast.LENGTH_SHORT).show()
             }
