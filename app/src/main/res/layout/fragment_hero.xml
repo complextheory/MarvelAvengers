@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/character_search"
+        android:id="@+id/character_search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textCursorDrawable="@null"
@@ -25,7 +25,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/character_search"
+        app:layout_constraintTop_toBottomOf="@id/character_search_view"
         tools:listitem="@layout/item_view_hero" />
 
 </LinearLayout>

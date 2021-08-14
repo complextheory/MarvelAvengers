@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,7 +27,9 @@ class HeroFragment: Fragment() {
     private val networkService = NetworkService()
     private val retrofit = networkService.getRetrofitInstance()
     private val characterApi = retrofit.create(HeroesApi::class.java)
-    private lateinit var matchedResultList: MutableList<MarvelResult>
+    private lateinit var matchedHeroList: MutableList<Hero>
+    private var tempHeroList = mutableListOf<Hero>()
+
 
 
     private val characterItemClickListener = object: HeroClickListener {
@@ -53,6 +56,8 @@ class HeroFragment: Fragment() {
         binding = FragmentHeroBinding.inflate(inflater, container, false)
 
         binding.rvCharacterList.adapter = heroAdapter
+        binding.characterSearchView.isSubmitButtonEnabled = true
+
 
         return binding.root
     }
@@ -72,7 +77,13 @@ class HeroFragment: Fragment() {
         viewModel.heroLiveData.observe(viewLifecycleOwner, Observer {
             it?.let { heroes ->
 
+                tempHeroList.clear()
+                tempHeroList.addAll(heroes)
+
                 heroAdapter.update(heroes)
+
+                performSearch()
+
 
                 Log.wtf("Coming From Fragment", "Character Name is: ${heroes[0].name},"
                         + " Character # of Comics Available in List is: ${heroes[0].comics.available},"
@@ -83,6 +94,37 @@ class HeroFragment: Fragment() {
                         + " Character # of Events Available in List is: ${heroes[0].events.available}")
             }
         })
+    }
+
+    private fun performSearch() {
+        binding.characterSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                search(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                search(newText)
+                return true
+            }
+        })
+    }
+
+    private fun search(text: String?) {
+        matchedHeroList = arrayListOf()
+
+        text?.let {
+            tempHeroList.forEach { hero ->
+                if (hero.name.contains(text, true)){
+                    matchedHeroList.add(hero)
+                }
+            }
+            heroAdapter.update(matchedHeroList)
+            if (matchedHeroList.isEmpty()) {
+                Toast.makeText(requireContext(), "No match found!", Toast.LENGTH_SHORT).show()
+            }
+            heroAdapter.update(matchedHeroList)
+        }
     }
 
     companion object {

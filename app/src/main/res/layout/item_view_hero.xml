@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <!-- We will be passing a Product object named 'product' and
+        <!-- We will be passing a Hero object named 'hero' and
     we will call its fields to populate our layout -->
         <variable
             name="hero"
             type="com.r4zielchicago.android.myapplication.api.entity.Hero" />
-        <!-- We will be passing a ProductItemClickListener object called
-    'productItemClick' and we will use this for managing list item clicks-->
+        <!-- We will be passing a HeroClickListener object called
+    'heroItemClick' and we will use this for managing list item clicks-->
         <variable
             name="heroItemClick"
             type="com.r4zielchicago.android.myapplication.utilities.HeroClickListener" />

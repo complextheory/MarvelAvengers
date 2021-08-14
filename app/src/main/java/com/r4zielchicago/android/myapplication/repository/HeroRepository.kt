@@ -17,19 +17,4 @@ class HeroRepository(private val heroesApi: HeroesApi) {
         hash = Constants.hash(),
         limit = Constants.limit
     )
-    //Alternate Methodology
-    fun getHeroesDisposable(
-        onSuccess: (MarvelResult?) -> Unit,
-        onFail: (t: Throwable) -> Unit
-    ): Disposable = heroesApi.getHeroes(
-        ts = Constants.ts,
-        apikey = Constants.API_KEY,
-        hash = Constants.hash(),
-        limit = Constants.limit
-    ).subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(
-            {onSuccess.invoke(it)},
-            {onFail.invoke(it)}
-        )
 }

@@ -43,9 +43,10 @@ class HeroAdapter(
 
     override fun getItemCount(): Int = heroes.size
 
-    inner class ViewHolder(private val binding: ItemViewHeroBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemViewHeroBinding): RecyclerView.ViewHolder(binding.root) {
+
         fun bind(hero: Hero) {
+
             val imageUrl = IMAGE_URL_FORMAT.format(
                 hero.thumbnail.path.replace("http", "https"),
                 hero.thumbnail.extension
