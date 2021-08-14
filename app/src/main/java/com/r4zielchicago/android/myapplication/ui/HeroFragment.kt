@@ -12,22 +12,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.r4zielchicago.android.myapplication.api.HeroesApi
 import com.r4zielchicago.android.myapplication.api.entity.Hero
-import com.r4zielchicago.android.myapplication.api.entity.MarvelResult
 import com.r4zielchicago.android.myapplication.databinding.FragmentHeroBinding
 import com.r4zielchicago.android.myapplication.factory.ViewModelFactory
 import com.r4zielchicago.android.myapplication.network.NetworkService
 import com.r4zielchicago.android.myapplication.utilities.HeroClickListener
-import java.security.acl.Owner
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class HeroFragment: Fragment() {
 
-    private lateinit var viewModel: HeroViewModel
-    private lateinit var viewModelFactory: ViewModelFactory
+    private val viewModel: HeroViewModel by viewModel()
     private lateinit var binding: FragmentHeroBinding
 
-    private val networkService = NetworkService()
-    private val retrofit = networkService.getRetrofitInstance()
-    private val characterApi = retrofit.create(HeroesApi::class.java)
     private var matchedHeroList = mutableListOf<Hero>()
 
     private val characterItemClickListener = object: HeroClickListener {
@@ -45,11 +40,6 @@ class HeroFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //TODO Move out
-        viewModelFactory = ViewModelFactory(characterApi)
-
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(HeroViewModel::class.java)
 
         binding = FragmentHeroBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel

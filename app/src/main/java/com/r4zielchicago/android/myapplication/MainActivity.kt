@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.r4zielchicago.android.myapplication.databinding.ActivityMainBinding
 import com.r4zielchicago.android.myapplication.ui.HeroFragment
+import com.r4zielchicago.android.myapplication.ui.HeroViewModel
 
 class MainActivity : AppCompatActivity() {
 
