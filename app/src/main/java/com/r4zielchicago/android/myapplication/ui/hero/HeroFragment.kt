@@ -26,10 +26,7 @@ class HeroFragment: Fragment() {
     private val heroItemClickListener = object: HeroClickListener {
         override fun onHeroClicked(hero: Hero) {
 
-            if (view?.findNavController()?.currentDestination?.id == R.id.heroFragment) {
-                view?.findNavController()?.navigate(viewModel.navToDetailsFragment(hero))
-            }
-
+            binding.root.findNavController().navigate(R.id.action_heroFragment_to_detailsFragment)
             //TODO Remember requireContext()/ requireActivity()
             Toast.makeText(requireContext(), hero.name, Toast.LENGTH_SHORT).show()
         }
@@ -48,7 +45,6 @@ class HeroFragment: Fragment() {
 
         binding.rvCharacterList.adapter = heroAdapter
         binding.characterSearchView.isSubmitButtonEnabled = true
-
 
         return binding.root
     }
@@ -70,7 +66,6 @@ class HeroFragment: Fragment() {
 
                 performSearch()
                 heroAdapter.update(heroes)
-
 
                 Log.i("Coming From Fragment", "Character Name is: ${heroes[0].name},"
                         + " Character # of Comics Available in List is: ${heroes[0].comics.available},"
@@ -119,9 +114,5 @@ class HeroFragment: Fragment() {
             }
             heroAdapter.update(matchedHeroList)
         }
-    }
-
-    companion object {
-        fun newInstance() = HeroFragment()
     }
 }

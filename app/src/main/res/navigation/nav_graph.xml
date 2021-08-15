@@ -12,12 +12,12 @@
         <action
             android:id="@+id/action_heroFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.r4zielchicago.android.myapplication.ui.details.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
-
+        tools:layout="@layout/fragment_details" >
     </fragment>
 </navigation>

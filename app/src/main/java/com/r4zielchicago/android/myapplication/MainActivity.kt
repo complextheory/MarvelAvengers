@@ -13,28 +13,13 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     private lateinit var navHostFragment: NavHostFragment
-//    private val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
     private lateinit var navController: NavController
-//    private val navController = navHostFragment.navController
-    lateinit var navGraph: NavGraph
-//    private val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
-
+    private lateinit var navGraph: NavGraph
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        if (savedInstanceState == null) {
-//            supportFragmentManager.beginTransaction()
-//                .replace(
-//                    R.id.nav_host_fragment,
-//                    HeroFragment.newInstance(),
-//                    HeroFragment::class.java.simpleName
-//                )
-//        }
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-
 
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController

@@ -48,8 +48,4 @@ class HeroViewModel(private val heroRepository: HeroRepository) : ViewModel() {
 
         tempHeroListLiveData.postValue(heroList)
     }
-
-    fun navToDetailsFragment(hero: Hero): NavDirections {
-         return HeroFragmentDirections.actionHeroFragmentToDetailsFragment()
-    }
 }
