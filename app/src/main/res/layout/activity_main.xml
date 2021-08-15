@@ -21,14 +21,6 @@
             app:defaultNavHost="true"
             app:navGraph="@navigation/nav_graph" />
 
-
-<!--        <androidx.fragment.app.FragmentContainerView-->
-<!--            android:id="@+id/hero_fragment_container"-->
-<!--            android:name="com.r4zielchicago.android.myapplication.ui.hero.HeroFragment"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"/>-->
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

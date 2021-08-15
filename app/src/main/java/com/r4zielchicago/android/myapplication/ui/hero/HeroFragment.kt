@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.r4zielchicago.android.myapplication.R
 import com.r4zielchicago.android.myapplication.api.entity.Hero
@@ -61,7 +60,7 @@ class HeroFragment: Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.heroLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.heroLiveData.observe(viewLifecycleOwner, {
             it?.let { heroes ->
 
                 performSearch()
@@ -76,7 +75,7 @@ class HeroFragment: Fragment() {
                         + " Character # of Events Available in List is: ${heroes[0].events.available}")
             }
         })
-        binding.viewModel?.tempHeroListLiveData?.observe(viewLifecycleOwner, Observer {
+        binding.viewModel?.tempHeroListLiveData?.observe(viewLifecycleOwner, {
             it?.let { heroes ->
 
                 heroAdapter.update(heroes)
