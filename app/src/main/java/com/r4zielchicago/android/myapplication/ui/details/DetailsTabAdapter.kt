@@ -4,9 +4,11 @@ import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.r4zielchicago.android.myapplication.api.entity.Hero
+import com.r4zielchicago.android.myapplication.databinding.ItemViewDetailsBinding
 
-class DetailsAdapter(manager: FragmentManager): FragmentPagerAdapter(manager) {
+class DetailsTabAdapter(manager: FragmentManager): FragmentPagerAdapter(manager) {
 
     private val heroes: MutableList<Hero> = mutableListOf()
 
@@ -42,5 +44,4 @@ class DetailsAdapter(manager: FragmentManager): FragmentPagerAdapter(manager) {
         fragmentList1.add(fragment)
         fragmentTitleList1.add(title)
     }
-
 }

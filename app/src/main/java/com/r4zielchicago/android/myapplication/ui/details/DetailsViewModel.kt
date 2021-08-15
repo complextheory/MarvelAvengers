@@ -29,4 +29,8 @@ class DetailsViewModel(private val heroRepository: HeroRepository) : ViewModel()
             )
     }
 
+    fun fetchComics() {
+
+    }
+
 }

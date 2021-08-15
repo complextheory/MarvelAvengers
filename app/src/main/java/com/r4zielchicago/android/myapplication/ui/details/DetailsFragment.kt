@@ -16,7 +16,7 @@ class DetailsFragment: Fragment() {
 
     lateinit var binding: FragmentDetailsBinding
 
-    private lateinit var adapter: DetailsAdapter
+    private lateinit var tabAdapter: DetailsTabAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,8 +27,7 @@ class DetailsFragment: Fragment() {
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
 
 
-        adapter = DetailsAdapter(requireActivity().supportFragmentManager)
-
+        tabAdapter = DetailsTabAdapter(requireActivity().supportFragmentManager)
         setupViewPager(binding.tabViewpager)
 
         // If we dont use setupWithViewPager() method then
@@ -53,11 +52,11 @@ class DetailsFragment: Fragment() {
     // the adapter to view pager
     private fun setupViewPager(viewpager: ViewPager) {
 
-        adapter.addFragment(ComicsFragment(), "Comics")
-        adapter.addFragment(SeriesFragment(), "Series")
-        adapter.addFragment(EventsFragment(), "Events")
+        tabAdapter.addFragment(ComicsFragment(), "Comics")
+        tabAdapter.addFragment(SeriesFragment(), "Series")
+        tabAdapter.addFragment(EventsFragment(), "Events")
 
-        viewpager.adapter = adapter
+        viewpager.adapter = tabAdapter
     }
 
 
@@ -65,7 +64,7 @@ class DetailsFragment: Fragment() {
         viewModel.heroLiveData.observe(viewLifecycleOwner, {
             it?.let { heroes ->
 
-                adapter.update(heroes)
+                tabAdapter.update(heroes)
 
                 Log.i("From  DetailsFragment", "Character Name is: ${heroes[0].name},"
                         + " Character # of Comics Available in List is: ${heroes[0].comics.available},"
@@ -76,5 +75,7 @@ class DetailsFragment: Fragment() {
                         + " Character # of Events Available in List is: ${heroes[0].events.available}")
             }
         })
+
+//        viewModel.comicsLiveData.observe()
     }
 }

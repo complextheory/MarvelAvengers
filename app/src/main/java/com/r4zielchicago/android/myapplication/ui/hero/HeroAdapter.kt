@@ -17,11 +17,12 @@ class HeroAdapter(
 
     private val heroes: MutableList<Hero> = mutableListOf()
 
-    fun update(data: List<Hero>){
+    fun update(data: List<Hero>) {
         heroes.clear()
         heroes.addAll(data)
         notifyDataSetChanged()
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -43,7 +44,8 @@ class HeroAdapter(
 
     override fun getItemCount(): Int = heroes.size
 
-    inner class ViewHolder(private val binding: ItemViewHeroBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemViewHeroBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(hero: Hero) {
 
@@ -61,14 +63,14 @@ class HeroAdapter(
                     .apply(
                         RequestOptions()
                             .placeholder(R.drawable.ic_marvel_logo)
-                    ).into(ivCharacterThumbnail)
+                    ).into(ivThumbnail)
 
-                tvCharacterName.text = hero.name
+                tvHeroName.text = hero.name
             }
         }
     }
 
-        companion object {
-            private const val IMAGE_URL_FORMAT = "%s" + "/standard_medium" + ".%s"
-        }
+    companion object {
+        private const val IMAGE_URL_FORMAT = "%s" + "/standard_medium" + ".%s"
     }
+}

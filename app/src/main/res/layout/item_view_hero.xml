@@ -31,12 +31,12 @@
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:id="@+id/iv_character_thumbnail"/>
+                android:id="@+id/iv_thumbnail"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_character_name"
+                android:id="@+id/tv_hero_name"
                 android:textSize="18sp"
                 android:padding="6dp"/>
         </LinearLayout>
