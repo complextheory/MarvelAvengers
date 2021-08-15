@@ -1,4 +1,4 @@
-package com.r4zielchicago.android.myapplication.ui
+package com.r4zielchicago.android.myapplication.ui.hero
 
 import android.os.Bundle
 import android.util.Log
@@ -9,12 +9,10 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.r4zielchicago.android.myapplication.api.HeroesApi
+import androidx.navigation.findNavController
+import com.r4zielchicago.android.myapplication.R
 import com.r4zielchicago.android.myapplication.api.entity.Hero
 import com.r4zielchicago.android.myapplication.databinding.FragmentHeroBinding
-import com.r4zielchicago.android.myapplication.factory.ViewModelFactory
-import com.r4zielchicago.android.myapplication.network.NetworkService
 import com.r4zielchicago.android.myapplication.utilities.HeroClickListener
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -25,15 +23,19 @@ class HeroFragment: Fragment() {
 
     private var matchedHeroList = mutableListOf<Hero>()
 
-    private val characterItemClickListener = object: HeroClickListener {
+    private val heroItemClickListener = object: HeroClickListener {
         override fun onHeroClicked(hero: Hero) {
+
+            if (view?.findNavController()?.currentDestination?.id == R.id.heroFragment) {
+                view?.findNavController()?.navigate(viewModel.navToDetailsFragment(hero))
+            }
 
             //TODO Remember requireContext()/ requireActivity()
             Toast.makeText(requireContext(), hero.name, Toast.LENGTH_SHORT).show()
         }
     }
 
-    private val heroAdapter = HeroAdapter(heroListener = characterItemClickListener)
+    private val heroAdapter = HeroAdapter(heroListener = heroItemClickListener)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,9 +68,9 @@ class HeroFragment: Fragment() {
         viewModel.heroLiveData.observe(viewLifecycleOwner, Observer {
             it?.let { heroes ->
 
+                performSearch()
                 heroAdapter.update(heroes)
 
-                performSearch()
 
                 Log.i("Coming From Fragment", "Character Name is: ${heroes[0].name},"
                         + " Character # of Comics Available in List is: ${heroes[0].comics.available},"

@@ -1,9 +1,10 @@
-package com.r4zielchicago.android.myapplication.ui
+package com.r4zielchicago.android.myapplication.ui.hero
 
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavDirections
 import com.r4zielchicago.android.myapplication.api.entity.Hero
 import com.r4zielchicago.android.myapplication.repository.HeroRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -46,5 +47,9 @@ class HeroViewModel(private val heroRepository: HeroRepository) : ViewModel() {
         else heroList.sortByDescending { it.name }
 
         tempHeroListLiveData.postValue(heroList)
+    }
+
+    fun navToDetailsFragment(hero: Hero): NavDirections {
+         return HeroFragmentDirections.actionHeroFragmentToDetailsFragment()
     }
 }

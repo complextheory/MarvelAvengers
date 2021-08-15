@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/heroFragment">
+
+    <fragment
+        android:id="@+id/heroFragment"
+        android:name="com.r4zielchicago.android.myapplication.ui.hero.HeroFragment"
+        android:label="HeroFragment" >
+        <action
+            android:id="@+id/action_heroFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.r4zielchicago.android.myapplication.ui.details.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" />
+
+    </fragment>
+</navigation>

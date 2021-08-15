@@ -1,4 +1,4 @@
-package com.r4zielchicago.android.myapplication.ui
+package com.r4zielchicago.android.myapplication.ui.hero
 
 import android.util.Log
 import android.view.LayoutInflater
