@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.r4zielchicago.android.myapplication.R
+import com.r4zielchicago.android.myapplication.ui.hero.HeroViewModel
 import kotlinx.android.synthetic.main.layout_comics.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -34,11 +35,11 @@ class ComicsFragment: Fragment() {
 
     override fun onStop() {
         super.onStop()
-        viewModel.heroLiveData.removeObservers(viewLifecycleOwner)
+        viewModel.comicLiveData.removeObservers(viewLifecycleOwner)
     }
 
     private fun observeViewModel() {
-        viewModel.heroLiveData.observe(viewLifecycleOwner, {
+        viewModel.comicLiveData.observe(viewLifecycleOwner, {
             it?.let { heroes ->
 
                 rvAdapter.update(heroes)

@@ -8,12 +8,12 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.plugins.RxJavaPlugins.onError
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class DetailsViewModel(private val detailsRepisitory: DetailsRepisitory) : ViewModel() {
+class DetailsViewModel(private val detailsRepository: DetailsRepisitory) : ViewModel() {
 
     val comicLiveData = MutableLiveData<List<Comic>>()
 
     fun fetchHeroes() {
-        detailsRepisitory.getComics()
+        detailsRepository.getComics()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

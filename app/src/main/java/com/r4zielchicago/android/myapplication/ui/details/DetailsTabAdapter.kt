@@ -4,15 +4,16 @@ import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.r4zielchicago.android.myapplication.api.entity.comics.Comic
 import com.r4zielchicago.android.myapplication.api.entity.heroes.Hero
 
 class DetailsTabAdapter(manager: FragmentManager): FragmentPagerAdapter(manager) {
 
-    private val heroes: MutableList<Hero> = mutableListOf()
+    private val comics: MutableList<Comic> = mutableListOf()
 
-    fun update(data: List<Hero>){
-        heroes.clear()
-        heroes.addAll(data)
+    fun update(data: List<Comic>){
+        comics.clear()
+        comics.addAll(data)
         notifyDataSetChanged()
     }
 

@@ -4,20 +4,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.r4zielchicago.android.myapplication.api.entity.comics.Comic
 import com.r4zielchicago.android.myapplication.api.entity.heroes.Hero
 import com.r4zielchicago.android.myapplication.databinding.ItemViewDetailsBinding
 import java.lang.IllegalArgumentException
 
 class DetailsRVAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val heroes: MutableList<Hero> = mutableListOf()
+    private val marvelData: MutableList<Comic> = mutableListOf()
 
 
-    enum class HeroTypes {Comics, Series, Events}
+    enum class DataTypes {Comics, Series, Events}
 
-    fun update(data: List<Hero>){
-        heroes.clear()
-        heroes.addAll(data)
+    fun update(data: List<Comic>){
+        marvelData.clear()
+        marvelData.addAll(data)
         notifyDataSetChanged()
     }
 
@@ -26,7 +27,7 @@ class DetailsRVAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         Log.i("Coming From Adapter", "Adapter")
 
         return when(viewType) {
-            HeroTypes.Comics.ordinal -> {ComicsViewHolder(
+            DataTypes.Comics.ordinal -> {ComicsViewHolder(
                 ItemViewDetailsBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -47,12 +48,12 @@ class DetailsRVAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val hero = heroes[position]
+        val comic = marvelData[position]
 
         when(getItemViewType(position)){
-            HeroTypes.Comics.ordinal -> {
+            DataTypes.Comics.ordinal -> {
                 holder as ComicsViewHolder
-                holder.bind(hero)
+                holder.bind(comic)
             }
             1 -> {
 
@@ -64,12 +65,12 @@ class DetailsRVAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    override fun getItemCount(): Int = heroes.size
+    override fun getItemCount(): Int = marvelData.size
 
 
     inner class ComicsViewHolder(private val binding: ItemViewDetailsBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(hero: Hero) {
+        fun bind(hero: Comic) {
 
 //            val imageUrl = IMAGE_URL_FORMAT.format(
 //                hero.thumbnail.path.replace("http", "https"),

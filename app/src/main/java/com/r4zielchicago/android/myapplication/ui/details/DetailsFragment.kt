@@ -45,7 +45,7 @@ class DetailsFragment: Fragment() {
 
     override fun onStop() {
         super.onStop()
-        viewModel.heroLiveData.removeObservers(viewLifecycleOwner)
+        viewModel.comicLiveData.removeObservers(viewLifecycleOwner)
     }
 
     // This function is used to add items in arraylist and assign
@@ -61,7 +61,7 @@ class DetailsFragment: Fragment() {
 
 
     private fun observeViewModel() {
-        viewModel.heroLiveData.observe(viewLifecycleOwner, {
+        viewModel.comicLiveData.observe(viewLifecycleOwner, {
             it?.let { heroes ->
 
                 tabAdapter.update(heroes)
