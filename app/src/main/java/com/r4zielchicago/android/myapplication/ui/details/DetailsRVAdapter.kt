@@ -4,10 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.r4zielchicago.android.myapplication.R
-import com.r4zielchicago.android.myapplication.api.entity.Hero
+import com.r4zielchicago.android.myapplication.api.entity.heroes.Hero
 import com.r4zielchicago.android.myapplication.databinding.ItemViewDetailsBinding
 import java.lang.IllegalArgumentException
 
@@ -79,8 +76,8 @@ class DetailsRVAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 //                hero.thumbnail.extension
 //            )
 
-            Log.i("ComicsViewHolder", "Comic 0 ResourceUri is: ${hero.comics.items[0].resourceURI}"
-                    + " The Name is: ${hero.comics.items[0].name}")
+//            Log.i("ComicsViewHolder", "Comic 0 ResourceUri is: ${hero.comics.items[0].resourceURI}"
+//                    + " The Name is: ${hero.comics.items[0].name}")
 //            val imageUrl = IMAGE_URL_FORMAT.format(
 //                hero.comics.items[0].resourceURI
 //            )

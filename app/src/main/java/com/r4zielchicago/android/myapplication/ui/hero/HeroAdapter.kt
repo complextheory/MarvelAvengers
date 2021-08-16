@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.r4zielchicago.android.myapplication.R
-import com.r4zielchicago.android.myapplication.api.entity.Hero
+import com.r4zielchicago.android.myapplication.api.entity.heroes.Hero
 import com.r4zielchicago.android.myapplication.databinding.ItemViewHeroBinding
 import com.r4zielchicago.android.myapplication.utilities.HeroClickListener
 

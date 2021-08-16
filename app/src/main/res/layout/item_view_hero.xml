@@ -7,7 +7,7 @@
              call its fields to populate our layout -->
         <variable
             name="hero"
-            type="com.r4zielchicago.android.myapplication.api.entity.Hero" />
+            type="com.r4zielchicago.android.myapplication.api.entity.heroes.Hero" />
         <!-- We will be passing a HeroClickListener object called
              'heroItemClick' and we will use this for managing list item clicks-->
         <variable

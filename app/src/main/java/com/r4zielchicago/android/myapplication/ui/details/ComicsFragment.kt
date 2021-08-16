@@ -43,13 +43,13 @@ class ComicsFragment: Fragment() {
 
                 rvAdapter.update(heroes)
 
-                Log.i("From  ComicsFragment", "Character Name is: ${heroes[0].name},"
-                        + " Character # of Comics Available in List is: ${heroes[0].comics.available},"
-                        + " Character Comics Uri is: ${heroes[0].comics.collectionURI},"
-                        + " Character 1st Comic Name in List is: ${heroes[0].comics.items[0].name},"
-                        + " Character 1st Comic Uri in List is: ${heroes[0].comics.items[0].resourceURI},"
-                        + " Character # of Series Available in List is: ${heroes[0].series.available},"
-                        + " Character # of Events Available in List is: ${heroes[0].events.available}")
+//                Log.i("From  ComicsFragment", "Character Name is: ${heroes[0].name},"
+//                        + " Character # of Comics Available in List is: ${heroes[0].comics.available},"
+//                        + " Character Comics Uri is: ${heroes[0].comics.collectionURI},"
+//                        + " Character 1st Comic Name in List is: ${heroes[0].comics.items[0].name},"
+//                        + " Character 1st Comic Uri in List is: ${heroes[0].comics.items[0].resourceURI},"
+//                        + " Character # of Series Available in List is: ${heroes[0].series.available},"
+//                        + " Character # of Events Available in List is: ${heroes[0].events.available}")
             }
         })
     }

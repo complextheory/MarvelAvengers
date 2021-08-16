@@ -4,7 +4,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.r4zielchicago.android.myapplication.api.entity.Hero
+import com.r4zielchicago.android.myapplication.api.entity.heroes.Hero
 import com.r4zielchicago.android.myapplication.repository.HeroRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.plugins.RxJavaPlugins.onError

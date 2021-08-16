@@ -10,7 +10,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.r4zielchicago.android.myapplication.R
-import com.r4zielchicago.android.myapplication.api.entity.Hero
+import com.r4zielchicago.android.myapplication.api.entity.heroes.Hero
 import com.r4zielchicago.android.myapplication.databinding.FragmentHeroBinding
 import com.r4zielchicago.android.myapplication.utilities.HeroClickListener
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -66,13 +66,7 @@ class HeroFragment: Fragment() {
                 performSearch()
                 heroAdapter.update(heroes)
 
-                Log.i("Coming From Fragment", "Character Name is: ${heroes[0].name},"
-                        + " Character # of Comics Available in List is: ${heroes[0].comics.available},"
-                        + " Character Comics Uri is: ${heroes[0].comics.collectionURI},"
-                        + " Character 1st Comic Name in List is: ${heroes[0].comics.items[0].name},"
-                        + " Character 1st Comic Uri in List is: ${heroes[0].comics.items[0].resourceURI},"
-                        + " Character # of Series Available in List is: ${heroes[0].series.available},"
-                        + " Character # of Events Available in List is: ${heroes[0].events.available}")
+                Log.i("Coming From Fragment", "Character Name is: ${heroes[0].name}")
             }
         })
         binding.viewModel?.tempHeroListLiveData?.observe(viewLifecycleOwner, {
