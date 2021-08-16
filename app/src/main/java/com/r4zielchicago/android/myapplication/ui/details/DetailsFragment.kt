@@ -46,9 +46,7 @@ class DetailsFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.fetchComics()
-        viewModel.fetchSeries()
-        viewModel.fetchEvents()
+        viewModel.fetchData()
     }
 
     override fun onStop() {
