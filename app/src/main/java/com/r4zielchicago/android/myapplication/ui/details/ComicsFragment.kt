@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.r4zielchicago.android.myapplication.R
-import com.r4zielchicago.android.myapplication.ui.details.adapter.ComicsAdapter
+import com.r4zielchicago.android.myapplication.ui.details.adapter.RVAdapter
+import com.r4zielchicago.android.myapplication.ui.details.viewModel.DetailsViewModel
 import kotlinx.android.synthetic.main.layout_comics.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ComicsFragment: Fragment() {
 
-    private val rvAdapter = ComicsAdapter()
+    private val rvAdapter = RVAdapter()
 
     private val viewModel: DetailsViewModel by viewModel()
 

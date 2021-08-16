@@ -13,7 +13,8 @@ class DetailsRepository(private val marvelApi: MarvelApi) {
             ts = Constants.ts,
             apikey = Constants.API_KEY,
             hash = Constants.hash(),
-            limit = Constants.limit)
+            limit = Constants.limit
+    )
 
     fun getSeries(): Observable<SeriesResult> = marvelApi.getSeries(
         ts = Constants.ts,
@@ -26,5 +27,6 @@ class DetailsRepository(private val marvelApi: MarvelApi) {
         ts = Constants.ts,
         apikey = Constants.API_KEY,
         hash = Constants.hash(),
-        limit = Constants.limit)
+        limit = Constants.limit
+    )
 }

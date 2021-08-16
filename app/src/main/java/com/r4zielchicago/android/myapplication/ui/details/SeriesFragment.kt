@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.r4zielchicago.android.myapplication.R
 import com.r4zielchicago.android.myapplication.ui.details.adapter.SeriesAdapter
+import com.r4zielchicago.android.myapplication.ui.details.viewModel.DetailsViewModel
 import kotlinx.android.synthetic.main.layout_series.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 

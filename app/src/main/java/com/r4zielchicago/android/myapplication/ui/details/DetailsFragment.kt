@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.r4zielchicago.android.myapplication.databinding.FragmentDetailsBinding
 import com.r4zielchicago.android.myapplication.ui.details.adapter.DetailsTabAdapter
+import com.r4zielchicago.android.myapplication.ui.details.viewModel.DetailsViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailsFragment: Fragment() {

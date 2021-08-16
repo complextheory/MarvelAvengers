@@ -12,5 +12,5 @@ data class HeroResult (
 	@Json(name = "attributionHTML")
 	val attributionHTML : String,
 	@Json(name = "data")
-	val data : Data
+	val heroData : HeroData
 )

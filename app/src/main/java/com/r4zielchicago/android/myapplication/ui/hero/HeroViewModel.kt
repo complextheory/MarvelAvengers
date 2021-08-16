@@ -23,7 +23,7 @@ class HeroViewModel(private val heroRepository: HeroRepository) : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    val heroes = it?.data?.heroes ?: emptyList()
+                    val heroes = it?.heroData?.heroes ?: emptyList()
                     heroLiveData.value = heroes
                     tempHeroListLiveData.value = heroes
                     heroList.clear()

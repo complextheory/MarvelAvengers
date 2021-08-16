@@ -12,7 +12,7 @@ import com.r4zielchicago.android.myapplication.api.entity.events.MarvelEvent
 import com.r4zielchicago.android.myapplication.api.entity.series.Series
 import com.r4zielchicago.android.myapplication.databinding.ItemViewDetailsBinding
 
-class ComicsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RVAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val comics: MutableList<Comic> = mutableListOf()
     private val series: MutableList<Series> = mutableListOf()

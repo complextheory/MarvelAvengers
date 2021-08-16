@@ -3,6 +3,7 @@ package com.r4zielchicago.android.myapplication
 import android.app.Application
 import com.r4zielchicago.android.myapplication.modules.*
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidApplication
 import org.koin.core.context.startKoin
 
 class App: Application() {
