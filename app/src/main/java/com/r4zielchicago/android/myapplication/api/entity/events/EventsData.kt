@@ -2,7 +2,7 @@ package com.r4zielchicago.android.myapplication.api.entity.events
 
 import com.squareup.moshi.Json
 
-data class Data(
+data class EventsData(
 	@Json(name="results")
-	val results: List<Event?>? = null
+	val results: List<MarvelEvent>? = null
 )

@@ -2,7 +2,7 @@ package com.r4zielchicago.android.myapplication.api
 
 import com.r4zielchicago.android.myapplication.api.entity.comics.ComicResult
 import com.r4zielchicago.android.myapplication.api.entity.events.EventResult
-import com.r4zielchicago.android.myapplication.api.entity.heroes.MarvelResult
+import com.r4zielchicago.android.myapplication.api.entity.heroes.HeroResult
 import com.r4zielchicago.android.myapplication.api.entity.series.SeriesResult
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
@@ -16,7 +16,7 @@ interface MarvelApi {
         @Query("apikey")apikey: String,
         @Query("hash")hash: String,
         @Query("limit")limit: String
-    ): Observable<MarvelResult>
+    ): Observable<HeroResult>
 
     @GET("comics")
     fun getComics(

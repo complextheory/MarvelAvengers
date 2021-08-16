@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 data class SeriesResult(
 
 	@Json(name="data")
-	val data: Data? = null,
+	val seriesData: SeriesData? = null,
 
 	@Json(name="attributionHTML")
 	val attributionHTML: String? = null,

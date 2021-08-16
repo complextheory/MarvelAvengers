@@ -19,7 +19,7 @@ class HeroViewModel(private val heroRepository: HeroRepository) : ViewModel() {
 
     fun fetchHeroes() {
         heroRepository.getHeroes()
-            .subscribeOn(Schedulers.io())
+            .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {

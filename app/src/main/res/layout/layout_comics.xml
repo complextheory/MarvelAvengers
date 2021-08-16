@@ -9,11 +9,11 @@
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_character_list"
+        android:id="@+id/rv_comics_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_view_hero" />
+        tools:listitem="@layout/item_view_details" />
 
 </LinearLayout>

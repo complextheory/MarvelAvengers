@@ -1,19 +1,34 @@
-package com.r4zielchicago.android.myapplication.ui.details
+package com.r4zielchicago.android.myapplication.ui.details.adapter
 
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.r4zielchicago.android.myapplication.api.entity.comics.Comic
-import com.r4zielchicago.android.myapplication.api.entity.heroes.Hero
+import com.r4zielchicago.android.myapplication.api.entity.events.MarvelEvent
+import com.r4zielchicago.android.myapplication.api.entity.series.Series
 
 class DetailsTabAdapter(manager: FragmentManager): FragmentPagerAdapter(manager) {
 
     private val comics: MutableList<Comic> = mutableListOf()
+    private val series: MutableList<Series> = mutableListOf()
+    private val events: MutableList<MarvelEvent> = mutableListOf()
 
-    fun update(data: List<Comic>){
+    fun updateComics(data: List<Comic>){
         comics.clear()
         comics.addAll(data)
+        notifyDataSetChanged()
+    }
+
+    fun updateSeries(data: List<Series>){
+        series.clear()
+        series.addAll(data)
+        notifyDataSetChanged()
+    }
+
+    fun updateEvents(data: List<MarvelEvent>){
+        events.clear()
+        events.addAll(data)
         notifyDataSetChanged()
     }
 

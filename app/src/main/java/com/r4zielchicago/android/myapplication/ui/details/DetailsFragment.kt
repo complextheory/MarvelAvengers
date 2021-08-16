@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.r4zielchicago.android.myapplication.databinding.FragmentDetailsBinding
+import com.r4zielchicago.android.myapplication.ui.details.adapter.DetailsTabAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailsFragment: Fragment() {
@@ -27,6 +28,7 @@ class DetailsFragment: Fragment() {
 
 
         tabAdapter = DetailsTabAdapter(requireActivity().supportFragmentManager)
+
         setupViewPager(binding.tabViewpager)
 
         // If we dont use setupWithViewPager() method then
@@ -44,11 +46,15 @@ class DetailsFragment: Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.fetchComics()
+        viewModel.fetchSeries()
+        viewModel.fetchEvents()
     }
 
     override fun onStop() {
         super.onStop()
         viewModel.comicLiveData.removeObservers(viewLifecycleOwner)
+        viewModel.seriesLiveData.removeObservers(viewLifecycleOwner)
+        viewModel.eventsLiveData.removeObservers(viewLifecycleOwner)
     }
 
     // This function is used to add items in arraylist and assign
@@ -62,25 +68,26 @@ class DetailsFragment: Fragment() {
         viewpager.adapter = tabAdapter
     }
 
-
-
-
     private fun observeViewModel() {
         viewModel.comicLiveData.observe(viewLifecycleOwner, {
             it?.let { comics ->
 
-                tabAdapter.update(comics)
-
-//                Log.i("From  DetailsFragment", "Character Name is: ${heroes[0].name},"
-//                        + " Character # of Comics Available in List is: ${heroes[0].comics.available},"
-//                        + " Character Comics Uri is: ${heroes[0].comics.collectionURI},"
-//                        + " Character 1st Comic Name in List is: ${heroes[0].comics.items[0].name},"
-//                        + " Character 1st Comic Uri in List is: ${heroes[0].comics.items[0].resourceURI},"
-//                        + " Character # of Series Available in List is: ${heroes[0].series.available},"
-//                        + " Character # of Events Available in List is: ${heroes[0].events.available}")
+                tabAdapter.updateComics(comics)
             }
         })
 
-//        viewModel.comicsLiveData.observe()
+        viewModel.seriesLiveData.observe(viewLifecycleOwner, {
+            it?.let { series ->
+
+                tabAdapter.updateSeries(series)
+            }
+        })
+
+        viewModel.eventsLiveData.observe(viewLifecycleOwner, {
+            it?.let { events ->
+
+                tabAdapter.updateEvents(events)
+            }
+        })
     }
 }

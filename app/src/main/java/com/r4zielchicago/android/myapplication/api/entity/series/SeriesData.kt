@@ -2,7 +2,7 @@ package com.r4zielchicago.android.myapplication.api.entity.series
 
 import com.squareup.moshi.Json
 
-data class Data(
+data class SeriesData(
 
 	@Json(name="total")
 	val total: String? = null,
@@ -17,5 +17,5 @@ data class Data(
 	val count: String? = null,
 
 	@Json(name="results")
-	val results: List<Series?>? = null
+	val results: List<Series>? = null
 )

@@ -4,24 +4,24 @@ import com.squareup.moshi.Json
 
 data class ComicResult(
 
-	@Json(name="copyright")
+    @Json(name="copyright")
 	val copyright: String? = null,
 
-	@Json(name="code")
+    @Json(name="code")
 	val code: String? = null,
 
-	@Json(name="data")
-	val data: Data? = null,
+    @Json(name="data")
+	val comicsData: ComicsData? = null,
 
-	@Json(name="attributionHTML")
+    @Json(name="attributionHTML")
 	val attributionHTML: String? = null,
 
-	@Json(name="attributionText")
+    @Json(name="attributionText")
 	val attributionText: String? = null,
 
-	@Json(name="etag")
+    @Json(name="etag")
 	val etag: String? = null,
 
-	@Json(name="status")
+    @Json(name="status")
 	val status: String? = null
 )

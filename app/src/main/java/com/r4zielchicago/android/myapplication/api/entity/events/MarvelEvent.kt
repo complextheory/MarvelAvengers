@@ -2,7 +2,7 @@ package com.r4zielchicago.android.myapplication.api.entity.events
 
 import com.squareup.moshi.Json
 
-data class Event(
+data class MarvelEvent(
 
 	@Json(name="thumbnail")
 	val thumbnail: Thumbnail? = null,
