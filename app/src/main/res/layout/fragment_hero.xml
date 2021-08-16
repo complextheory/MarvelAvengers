@@ -52,7 +52,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/character_search_view"
-            tools:listitem="@layout/item_view_hero" />
+            tools:listitem="@layout/item_view_hero"
+            android:background="@color/black"/>
 
     </LinearLayout>
 

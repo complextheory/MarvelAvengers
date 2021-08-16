@@ -7,7 +7,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import com.r4zielchicago.android.myapplication.databinding.ActivityMainBinding
-import com.r4zielchicago.android.myapplication.ui.hero.HeroFragment
 
 class MainActivity : AppCompatActivity() {
 

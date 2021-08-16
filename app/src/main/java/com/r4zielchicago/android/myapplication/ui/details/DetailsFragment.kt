@@ -1,7 +1,6 @@
 package com.r4zielchicago.android.myapplication.ui.details
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,8 +38,12 @@ class DetailsFragment: Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.fetchHeroes()
         observeViewModel()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchComics()
     }
 
     override fun onStop() {
@@ -60,11 +63,13 @@ class DetailsFragment: Fragment() {
     }
 
 
+
+
     private fun observeViewModel() {
         viewModel.comicLiveData.observe(viewLifecycleOwner, {
-            it?.let { heroes ->
+            it?.let { comics ->
 
-                tabAdapter.update(heroes)
+                tabAdapter.update(comics)
 
 //                Log.i("From  DetailsFragment", "Character Name is: ${heroes[0].name},"
 //                        + " Character # of Comics Available in List is: ${heroes[0].comics.available},"

@@ -4,6 +4,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.r4zielchicago.android.myapplication.R
 import com.r4zielchicago.android.myapplication.api.entity.comics.Comic
 import com.r4zielchicago.android.myapplication.api.entity.heroes.Hero
 import com.r4zielchicago.android.myapplication.databinding.ItemViewDetailsBinding
@@ -70,29 +73,26 @@ class DetailsRVAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class ComicsViewHolder(private val binding: ItemViewDetailsBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(hero: Comic) {
+        fun bind(comic: Comic) {
 
-//            val imageUrl = IMAGE_URL_FORMAT.format(
-//                hero.thumbnail.path.replace("http", "https"),
-//                hero.thumbnail.extension
-//            )
+            val imageUrl = IMAGE_URL_FORMAT.format(
+                comic.thumbnail?.path?.replace("http", "https"),
+                comic.thumbnail?.extension
+            )
 
 //            Log.i("ComicsViewHolder", "Comic 0 ResourceUri is: ${hero.comics.items[0].resourceURI}"
 //                    + " The Name is: ${hero.comics.items[0].name}")
-//            val imageUrl = IMAGE_URL_FORMAT.format(
-//                hero.comics.items[0].resourceURI
-//            )
 
             binding.apply {
 
-//                Glide.with(this.root)
-//                    .load(imageUrl)
-//                    .apply(
-//                        RequestOptions()
-//                            .placeholder(R.drawable.ic_marvel_logo)
-//                    ).into(ivThumbnail)
-//
-//                tvDescription.text = hero.name
+                Glide.with(this.root)
+                    .load(imageUrl)
+                    .apply(
+                        RequestOptions()
+                            .placeholder(R.drawable.ic_marvel_logo)
+                    ).into(ivThumbnail)
+
+                tvDescription.text = comic.title
             }
         }
     }
