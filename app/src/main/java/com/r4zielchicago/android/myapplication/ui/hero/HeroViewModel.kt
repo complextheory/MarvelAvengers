@@ -14,7 +14,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 class HeroViewModel(private val heroRepository: HeroRepository, private val prefsUtil: SharedPrefsUtil) : ViewModel() {
 
     val heroLiveData = MutableLiveData<List<Hero>>()
-    val tempHeroListLiveData = MutableLiveData<List<Hero>>()
     val heroList = mutableListOf<Hero>()
     private var isListSortedAscending: Boolean = true
 
@@ -26,13 +25,11 @@ class HeroViewModel(private val heroRepository: HeroRepository, private val pref
                 {
                     val heroes = it?.heroData?.heroes ?: emptyList()
                     heroLiveData.value = heroes
-                    tempHeroListLiveData.value = heroes
                     heroList.clear()
                     heroList.addAll(heroes)
                 },
                 {
                     heroLiveData.value = prefsUtil.getFromPrefs(heroKey)
-                    tempHeroListLiveData.value = prefsUtil.getFromPrefs(heroKey)
                     heroList.clear()
                     onError(it)
                 }
@@ -44,6 +41,6 @@ class HeroViewModel(private val heroRepository: HeroRepository, private val pref
         if (isListSortedAscending) heroList.sortBy { it.name }
         else heroList.sortByDescending { it.name }
 
-        tempHeroListLiveData.postValue(heroList)
+        heroLiveData.postValue(heroList)
     }
 }

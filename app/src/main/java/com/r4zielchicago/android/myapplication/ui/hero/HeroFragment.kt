@@ -67,12 +67,6 @@ class HeroFragment: Fragment() {
                 heroAdapter.update(heroes)
             }
         })
-        binding.viewModel?.tempHeroListLiveData?.observe(viewLifecycleOwner, {
-            it?.let { heroes ->
-
-                heroAdapter.update(heroes)
-            }
-        })
     }
 
     //TODO FIX SEARCH AND SORT BUG
