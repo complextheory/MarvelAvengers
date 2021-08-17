@@ -16,8 +16,9 @@ import com.r4zielchicago.android.myapplication.R
 import com.r4zielchicago.android.myapplication.databinding.FragmentDetailsBinding
 import com.r4zielchicago.android.myapplication.ui.details.adapter.DetailsTabAdapter
 import com.r4zielchicago.android.myapplication.ui.details.viewModel.DetailsViewModel
+import kotlinx.android.synthetic.main.layout_details_image.*
+import kotlinx.android.synthetic.main.layout_details_image.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import androidx.navigation.fragment.navArgs
 
 class DetailsFragment: Fragment() {
 
@@ -55,8 +56,7 @@ class DetailsFragment: Fragment() {
         if (args == null) {
             Log.e("DetailsFragment", "DetailsFragment did not receive args")
         }else {
-//            val args = DetailsFragmentArgs.fromBundle(args)
-            bindThumbnail(args.imagePath, args.imageExtention)
+            bindArgs(args.imagePath, args.imageExtention, args.heroName)
         }
     }
 
@@ -122,7 +122,9 @@ class DetailsFragment: Fragment() {
         })
     }
 
-    private fun bindThumbnail(path: String?, extension: String?) {
+    private fun bindArgs(path: String?, extension: String?, name: String?) {
+
+        binding.root.tv_hero_name.text = name
 
         val imageUrl = Constants.IMAGE_URL_FORMAT.format(
             path?.replace("http", "https"),
@@ -135,7 +137,7 @@ class DetailsFragment: Fragment() {
                 .apply(
                     RequestOptions()
                         .placeholder(R.drawable.ic_marvel_logo)
-                ).into(ivThumbnail)
+                ).into(iv_thumbnail)
         }
     }
 

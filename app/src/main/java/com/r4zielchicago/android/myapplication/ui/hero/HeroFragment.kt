@@ -35,7 +35,7 @@ class HeroFragment: Fragment() {
 
             Toast.makeText(requireContext(), hero.name, Toast.LENGTH_SHORT).show()
             val directions =
-                HeroFragmentDirections.actionHeroFragmentToDetailsFragment(hero.thumbnail.path, hero.thumbnail.extension)
+                HeroFragmentDirections.actionHeroFragmentToDetailsFragment(hero.thumbnail.path, hero.thumbnail.extension, hero.name)
             binding.root.findNavController().navigate(directions)
         }
     }
