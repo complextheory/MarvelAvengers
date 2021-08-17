@@ -1,5 +1,15 @@
 # MarvelAvengers WIKI
 
+
+<img src = "https://github.com/complextheory/MarvelAvengers/blob/master/app/src/main/res/drawable/Screenshot_1629234687.png" width="300"
+height="500">
+<img src = "https://github.com/complextheory/MarvelAvengers/blob/master/app/src/main/res/drawable/Screenshot_1629234510.png" width="300"
+height="500">
+<img src = "https://github.com/complextheory/MarvelAvengers/blob/master/app/src/main/res/drawable/Screenshot_1629234525.png" width="300"
+height="500">                                                                                                                               
+                                                                                                                                    
+                                                                                                                                                                  
+
 A Kotlin App that consumes the [Marvel Characters Api](https://developer.marvel.com/documentation/getting_started). 
 
 * Uses clean code methodology and principles 
