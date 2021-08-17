@@ -1,16 +1,23 @@
 package com.r4zielchicago.android.myapplication.ui.details
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.tabs.TabLayoutMediator
+import com.r4zielchicago.android.myapplication.Constants
+import com.r4zielchicago.android.myapplication.R
 import com.r4zielchicago.android.myapplication.databinding.FragmentDetailsBinding
 import com.r4zielchicago.android.myapplication.ui.details.adapter.DetailsTabAdapter
 import com.r4zielchicago.android.myapplication.ui.details.viewModel.DetailsViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
+import androidx.navigation.fragment.navArgs
 
 class DetailsFragment: Fragment() {
 
@@ -21,6 +28,8 @@ class DetailsFragment: Fragment() {
     private lateinit var tabAdapter: DetailsTabAdapter
 
     private enum class TITLES {Comics, Series, Events}
+
+    private val args: DetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,13 +52,17 @@ class DetailsFragment: Fragment() {
         super.onResume()
         viewModel.observeAndFetchData()
         observeViewModel()
+        if (args == null) {
+            Log.e("DetailsFragment", "DetailsFragment did not receive args")
+        }else {
+//            val args = DetailsFragmentArgs.fromBundle(args)
+            bindThumbnail(args.imagePath, args.imageExtention)
+        }
     }
 
     override fun onStop() {
+       removeObservers()
         super.onStop()
-        viewModel.comicLiveData.removeObservers(viewLifecycleOwner)
-        viewModel.seriesLiveData.removeObservers(viewLifecycleOwner)
-        viewModel.eventsLiveData.removeObservers(viewLifecycleOwner)
     }
 
     // This function is used to add items in arraylist and assign
@@ -101,5 +114,34 @@ class DetailsFragment: Fragment() {
                 tabAdapter.updateEvents(events)
             }
         })
+        viewModel.heroesLiveData.observe(viewLifecycleOwner, {
+            it?.let { heroes ->
+
+                tabAdapter.updateHeroes(heroes)
+            }
+        })
+    }
+
+    private fun bindThumbnail(path: String?, extension: String?) {
+
+        val imageUrl = Constants.IMAGE_URL_FORMAT.format(
+            path?.replace("http", "https"),
+            extension
+        )
+
+        binding.apply {
+            Glide.with(this.root)
+                .load(imageUrl)
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.ic_marvel_logo)
+                ).into(ivThumbnail)
+        }
+    }
+
+    private fun removeObservers(){
+        viewModel.comicLiveData.removeObservers(viewLifecycleOwner)
+        viewModel.seriesLiveData.removeObservers(viewLifecycleOwner)
+        viewModel.eventsLiveData.removeObservers(viewLifecycleOwner)
     }
 }

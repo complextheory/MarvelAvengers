@@ -11,17 +11,12 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.gson.Gson
-import com.google.gson.JsonSyntaxException
-import com.google.gson.reflect.TypeToken
 import com.r4zielchicago.android.myapplication.R
 import com.r4zielchicago.android.myapplication.api.entity.heroes.Hero
-import com.r4zielchicago.android.myapplication.api.entity.heroes.HeroData
-import com.r4zielchicago.android.myapplication.api.entity.heroes.HeroResult
 import com.r4zielchicago.android.myapplication.databinding.FragmentHeroBinding
 import com.r4zielchicago.android.myapplication.utilities.HeroClickListener
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.lang.reflect.Type
 
 
 class HeroFragment: Fragment() {
@@ -35,14 +30,13 @@ class HeroFragment: Fragment() {
     private var matchedHeroList = mutableListOf<Hero>()
 
 
-
-
     private val heroItemClickListener = object: HeroClickListener {
         override fun onHeroClicked(hero: Hero) {
 
-            binding.root.findNavController().navigate(R.id.action_heroFragment_to_detailsFragment)
-            //TODO Remember requireContext()/ requireActivity()
             Toast.makeText(requireContext(), hero.name, Toast.LENGTH_SHORT).show()
+            val directions =
+                HeroFragmentDirections.actionHeroFragmentToDetailsFragment(hero.thumbnail.path, hero.thumbnail.extension)
+            binding.root.findNavController().navigate(directions)
         }
     }
 
@@ -84,6 +78,7 @@ class HeroFragment: Fragment() {
     private fun observeViewModel() {
         viewModel.heroLiveData.observe(viewLifecycleOwner, {
             it?.let { heroes ->
+
 
 
                 val heroJsonObject = gson.toJson(heroes)

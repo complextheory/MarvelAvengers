@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.r4zielchicago.android.myapplication.Constants
 import com.r4zielchicago.android.myapplication.R
 import com.r4zielchicago.android.myapplication.api.entity.heroes.Hero
 import com.r4zielchicago.android.myapplication.databinding.ItemViewHeroBinding
@@ -49,7 +50,7 @@ class HeroAdapter(
 
         fun bind(hero: Hero) {
 
-            val imageUrl = IMAGE_URL_FORMAT.format(
+            val imageUrl = Constants.IMAGE_URL_FORMAT.format(
                 hero.thumbnail.path.replace("http", "https"),
                 hero.thumbnail.extension
             )
@@ -68,9 +69,5 @@ class HeroAdapter(
                 tvHeroName.text = hero.name
             }
         }
-    }
-
-    companion object {
-        private const val IMAGE_URL_FORMAT = "%s" + "/standard_medium" + ".%s"
     }
 }

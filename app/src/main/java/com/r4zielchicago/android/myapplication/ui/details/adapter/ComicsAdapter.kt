@@ -8,24 +8,25 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.r4zielchicago.android.myapplication.Constants
 import com.r4zielchicago.android.myapplication.R
-import com.r4zielchicago.android.myapplication.api.entity.events.MarvelEvent
+import com.r4zielchicago.android.myapplication.api.entity.comics.Comic
 import com.r4zielchicago.android.myapplication.databinding.ItemViewDetailsBinding
 
-class EventsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
+class ComicsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val events: MutableList<MarvelEvent> = mutableListOf()
+    private val comics: MutableList<Comic> = mutableListOf()
 
-    fun update(data: List<MarvelEvent>) {
-        events.clear()
-        events.addAll(data)
+    fun update(data: List<Comic>){
+        comics.clear()
+        comics.addAll(data)
         notifyDataSetChanged()
-        Log.i("RVAdapter", "Update Events "
-                + "Data is ${data[0].title}")
+        Log.i("RVAdapter", "Update Comics")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return EventsViewHolder( ItemViewDetailsBinding.inflate(
+        Log.i("Coming From Adapter", "Adapter")
+
+        return ComicsViewHolder( ItemViewDetailsBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -34,23 +35,22 @@ class EventsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        val marvelEvent: MarvelEvent = events[position]
-        holder as EventsViewHolder
-        holder.bind(marvelEvent)
+        val comic: Comic = comics[position]
+        holder as ComicsViewHolder
+        holder.bind(comic)
     }
 
-    override fun getItemCount(): Int = events.size
+    override fun getItemCount(): Int = comics.size
 
-    inner class EventsViewHolder(private val binding: ItemViewDetailsBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(event: MarvelEvent) {
+    inner class ComicsViewHolder(private val binding: ItemViewDetailsBinding): RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(comic: Comic) {
 
             val imageUrl = Constants.IMAGE_URL_FORMAT.format(
-                event.thumbnail?.path?.replace("http", "https"),
-                event.thumbnail?.extension
+                comic.thumbnail?.path?.replace("http", "https"),
+                comic.thumbnail?.extension
             )
-
-            Log.i("SeriesViewHolder", "Series Title is: ${event.title}")
 
             binding.apply {
 
@@ -61,7 +61,7 @@ class EventsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
                             .placeholder(R.drawable.ic_marvel_logo)
                     ).into(ivThumbnail)
 
-                tvDescription.text = event.title
+                tvDescription.text = comic.title
             }
         }
     }

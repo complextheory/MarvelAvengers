@@ -12,6 +12,7 @@ class Constants {
         const val API_KEY = "b6bc9ce85bf5a179e988c25b9fb2e6be"
         const val PRIVATE_KEY = "ed5047a179e4476ead80a8fbe5474697746ef454"
         const val limit = "100"
+        const val IMAGE_URL_FORMAT = "%s" + "/standard_medium" + ".%s"
 
         fun hash(): String {
             val input = "$ts$PRIVATE_KEY$API_KEY"

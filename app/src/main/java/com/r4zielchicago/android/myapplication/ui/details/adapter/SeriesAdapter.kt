@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.r4zielchicago.android.myapplication.Constants
 import com.r4zielchicago.android.myapplication.R
 import com.r4zielchicago.android.myapplication.api.entity.series.Series
 import com.r4zielchicago.android.myapplication.databinding.ItemViewDetailsBinding
@@ -44,7 +45,7 @@ class SeriesAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind(series: Series) {
 
-            val imageUrl = IMAGE_URL_FORMAT.format(
+            val imageUrl = Constants.IMAGE_URL_FORMAT.format(
                 series.thumbnail?.path?.replace("http", "https"),
                 series.thumbnail?.extension
             )
@@ -63,9 +64,5 @@ class SeriesAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 tvDescription.text = series.title
             }
         }
-    }
-
-    companion object {
-        private const val IMAGE_URL_FORMAT = "%s" + "/standard_medium" + ".%s"
     }
 }
