@@ -1,7 +1,6 @@
 package com.r4zielchicago.android.myapplication.ui.details
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +40,7 @@ class DetailsFragment: Fragment() {
 
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
 
-        // TODO Start Progress D
+        // TODO Start Progress Dialog
 
         tabAdapter = DetailsTabAdapter(requireActivity())
 

@@ -3,7 +3,6 @@ package com.r4zielchicago.android.myapplication.utilities
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.r4zielchicago.android.myapplication.api.entity.heroes.HeroData
 
 const val heroKey = "HERO_KEY"
 const val comicsKey = "COMICS_KEY"

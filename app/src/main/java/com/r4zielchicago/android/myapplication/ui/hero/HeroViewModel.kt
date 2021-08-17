@@ -1,6 +1,5 @@
 package com.r4zielchicago.android.myapplication.ui.hero
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,7 +32,6 @@ class HeroViewModel(private val heroRepository: HeroRepository, private val pref
                 },
                 {
                     heroLiveData.value = prefsUtil.getFromPrefs(heroKey)
-                    Log.e("From Hero ViewModel", "Get Heroes Failed")
                     tempHeroListLiveData.value = prefsUtil.getFromPrefs(heroKey)
                     heroList.clear()
                     onError(it)
@@ -42,8 +40,6 @@ class HeroViewModel(private val heroRepository: HeroRepository, private val pref
     }
 
     fun onSortClicked(view: View) {
-        Log.i("Coming From HandleClick", "Handling Click")
-
         isListSortedAscending = !isListSortedAscending
         if (isListSortedAscending) heroList.sortBy { it.name }
         else heroList.sortByDescending { it.name }

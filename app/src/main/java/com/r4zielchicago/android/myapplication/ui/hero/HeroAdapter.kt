@@ -1,6 +1,5 @@
 package com.r4zielchicago.android.myapplication.ui.hero
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -24,10 +23,7 @@ class HeroAdapter(
         notifyDataSetChanged()
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-        Log.i("Coming From Adapter", "Adapter")
 
         return ViewHolder(
             ItemViewHeroBinding.inflate(

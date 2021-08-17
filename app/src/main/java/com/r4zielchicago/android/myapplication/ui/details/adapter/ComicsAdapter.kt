@@ -1,6 +1,5 @@
 package com.r4zielchicago.android.myapplication.ui.details.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,12 +18,9 @@ class ComicsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         comics.clear()
         comics.addAll(data)
         notifyDataSetChanged()
-        Log.i("RVAdapter", "Update Comics")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
-        Log.i("Coming From Adapter", "Adapter")
 
         return ComicsViewHolder( ItemViewDetailsBinding.inflate(
             LayoutInflater.from(parent.context),

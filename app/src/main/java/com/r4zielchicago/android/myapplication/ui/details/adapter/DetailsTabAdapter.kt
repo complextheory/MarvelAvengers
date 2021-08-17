@@ -3,7 +3,6 @@ package com.r4zielchicago.android.myapplication.ui.details.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.adapter.FragmentViewHolder
 import com.r4zielchicago.android.myapplication.api.entity.comics.Comic
 import com.r4zielchicago.android.myapplication.api.entity.events.MarvelEvent
 import com.r4zielchicago.android.myapplication.api.entity.heroes.Hero

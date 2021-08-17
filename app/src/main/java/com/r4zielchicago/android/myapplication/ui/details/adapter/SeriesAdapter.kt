@@ -1,6 +1,5 @@
 package com.r4zielchicago.android.myapplication.ui.details.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,8 +18,6 @@ class SeriesAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         series.clear()
         series.addAll(data)
         notifyDataSetChanged()
-        Log.wtf("RVAdapter", "Update Series "
-                + "Data is ${data[0].title}")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -49,8 +46,6 @@ class SeriesAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 series.thumbnail?.path?.replace("http", "https"),
                 series.thumbnail?.extension
             )
-
-            Log.i("SeriesViewHolder", "Series Title is: ${series.title}")
 
             binding.apply {
 

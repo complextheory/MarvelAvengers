@@ -1,7 +1,6 @@
 package com.r4zielchicago.android.myapplication.ui.hero
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,11 +63,8 @@ class HeroFragment: Fragment() {
     private fun observeViewModel() {
         viewModel.heroLiveData.observe(viewLifecycleOwner, {
             it?.let { heroes ->
-
                 performSearch()
                 heroAdapter.update(heroes)
-
-                Log.i("Coming From Fragment", "Character Name is: ${heroes[0].name}")
             }
         })
         binding.viewModel?.tempHeroListLiveData?.observe(viewLifecycleOwner, {
@@ -105,6 +101,7 @@ class HeroFragment: Fragment() {
                     matchedHeroList.add(hero)
                 }
             }
+
             if (matchedHeroList.isEmpty()) {
                 Toast.makeText(requireContext(), "No match found!", Toast.LENGTH_SHORT).show()
             }
