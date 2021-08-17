@@ -11,7 +11,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.r4zielchicago.android.myapplication.api.entity.heroes.Hero
+import com.r4zielchicago.android.myapplication.api.entity.heroes.HeroData
 import com.r4zielchicago.android.myapplication.databinding.FragmentHeroBinding
 import com.r4zielchicago.android.myapplication.utilities.HeroClickListener
 import org.koin.android.ext.android.inject
@@ -21,7 +23,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class HeroFragment: Fragment() {
 
     private val viewModel: HeroViewModel by viewModel()
-    val sharedPreferences: SharedPreferences by inject()
+    private val sharedPreferences: SharedPreferences by inject()
     private val gson: Gson by inject()
 
 
@@ -29,14 +31,8 @@ class HeroFragment: Fragment() {
 
     private var matchedHeroList = mutableListOf<Hero>()
 
-
     private val heroItemClickListener = object: HeroClickListener {
         override fun onHeroClicked(hero: Hero) {
-//            val visibility = binding.progressBar.visibility
-//
-//            if (visibility == View.GONE) {
-//                binding.progressBar.visibility = visibility
-//            }
 
             Toast.makeText(requireContext(), hero.name, Toast.LENGTH_SHORT).show()
             val directions =
@@ -65,18 +61,12 @@ class HeroFragment: Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.fetchHeroes()
-//        val visibility = binding.progressBar.visibility
-//
-//        if (visibility == View.GONE) {
-//            binding.progressBar.visibility = visibility
-//        }
 
-//        if (checkSharedPrefs() == null) {
-//            viewModel.fetchHeroes()
-//        } else {
-//            val heroes = sharedPreferences.getString("hero_json", null)
-//            viewModel.heroLiveData.value = gson.fromJson(heroes, HeroData::class.java).heroes
-//        }
+        if (getCachedList().isEmpty()) {
+            viewModel.fetchHeroes()
+        } else {
+            viewModel.heroLiveData.value = getCachedList()
+        }
         observeViewModel()
     }
 
@@ -89,7 +79,7 @@ class HeroFragment: Fragment() {
         viewModel.heroLiveData.observe(viewLifecycleOwner, {
             it?.let { heroes ->
 
-
+                cacheList(heroes)
 
                 val heroJsonObject = gson.toJson(heroes)
 
@@ -115,6 +105,23 @@ class HeroFragment: Fragment() {
         })
     }
 
+    private fun cacheList(list: List<Hero>) {
+        val gson = Gson()
+        val json = gson.toJson(list)//Converting List to Json
+        sharedPreferences.edit()
+            .putString("LIST", json)
+            .apply()
+    }
+
+    private fun getCachedList(): List<Hero> {
+
+        val gson = Gson()
+        val json = sharedPreferences.getString("LIST", null)
+        val type = object : TypeToken<List<Hero>>(){}.type //converting Json to List
+        return gson.fromJson(json, type)
+    }
+
+    //TODO FIX SHARED PREFS
 //    private fun checkSharedPrefs(): Collection<HeroResult>? {
 //
 //        try {
@@ -132,6 +139,8 @@ class HeroFragment: Fragment() {
 ////        return gson.fromJson(heroes, HeroData::class.java)?: null
 //    }
 
+
+    //TODO FIX SEARCH AND SORT BUG
     private fun performSearch() {
         binding.characterSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

@@ -29,7 +29,7 @@ class NetworkService {
     fun getRetrofitInstance() : Retrofit {
         val okHttpClient = getOkHttpClient()
 
-        val baseUrl =  PROTOCOL + "://" + HOST + PATH
+        val baseUrl = "$PROTOCOL://$HOST$PATH"
 
         return Retrofit.Builder()
             .client(okHttpClient)
@@ -49,7 +49,9 @@ class NetworkService {
             override fun log(message: String) {
                 try {
                     Log.v("OkHttp", message)
-                } catch (e: Exception) { }
+                } catch (e: Exception) {
+                    throw e
+                }
             }
         })
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY

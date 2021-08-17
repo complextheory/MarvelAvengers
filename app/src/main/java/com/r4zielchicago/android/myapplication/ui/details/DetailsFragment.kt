@@ -30,6 +30,7 @@ class DetailsFragment: Fragment() {
 
     private enum class TITLES {Comics, Series, Events}
 
+    //TODO FIX PHANTOM NAVARGS BUG
     private val args: DetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
