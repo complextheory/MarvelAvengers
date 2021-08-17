@@ -11,7 +11,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.gson.Gson
-import com.r4zielchicago.android.myapplication.R
 import com.r4zielchicago.android.myapplication.api.entity.heroes.Hero
 import com.r4zielchicago.android.myapplication.databinding.FragmentHeroBinding
 import com.r4zielchicago.android.myapplication.utilities.HeroClickListener
@@ -25,6 +24,7 @@ class HeroFragment: Fragment() {
     val sharedPreferences: SharedPreferences by inject()
     private val gson: Gson by inject()
 
+
     private lateinit var binding: FragmentHeroBinding
 
     private var matchedHeroList = mutableListOf<Hero>()
@@ -32,6 +32,11 @@ class HeroFragment: Fragment() {
 
     private val heroItemClickListener = object: HeroClickListener {
         override fun onHeroClicked(hero: Hero) {
+//            val visibility = binding.progressBar.visibility
+//
+//            if (visibility == View.GONE) {
+//                binding.progressBar.visibility = visibility
+//            }
 
             Toast.makeText(requireContext(), hero.name, Toast.LENGTH_SHORT).show()
             val directions =
@@ -60,6 +65,11 @@ class HeroFragment: Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.fetchHeroes()
+//        val visibility = binding.progressBar.visibility
+//
+//        if (visibility == View.GONE) {
+//            binding.progressBar.visibility = visibility
+//        }
 
 //        if (checkSharedPrefs() == null) {
 //            viewModel.fetchHeroes()

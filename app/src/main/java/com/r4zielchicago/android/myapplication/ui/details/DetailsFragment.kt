@@ -40,6 +40,8 @@ class DetailsFragment: Fragment() {
 
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
 
+        // TODO Start Progress D
+
         tabAdapter = DetailsTabAdapter(requireActivity())
 
         binding.tabViewpager.adapter = tabAdapter
@@ -53,11 +55,9 @@ class DetailsFragment: Fragment() {
         super.onResume()
         viewModel.observeAndFetchData()
         observeViewModel()
-        if (args == null) {
-            Log.e("DetailsFragment", "DetailsFragment did not receive args")
-        }else {
-            bindArgs(args.imagePath, args.imageExtention, args.heroName)
-        }
+        bindArgs(args.imagePath, args.imageExtention, args.heroName)
+        val visibility = if (binding.progressBar.visibility == View.GONE) View.VISIBLE else View.GONE
+        binding.progressBar.visibility = visibility
     }
 
     override fun onStop() {
@@ -97,6 +97,11 @@ class DetailsFragment: Fragment() {
         viewModel.comicLiveData.observe(viewLifecycleOwner, {
             it?.let { comics ->
 
+                val visibility = binding.progressBar.visibility
+
+                if (visibility == View.GONE) {
+                    binding.progressBar.visibility = visibility
+                }
                 tabAdapter.updateComics(comics)
             }
         })
