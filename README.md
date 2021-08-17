@@ -1,11 +1,11 @@
 # MarvelAvengers WIKI
 
 
-<img src = "https://github.com/complextheory/MarvelAvengers/blob/master/app/src/main/res/drawable/Screenshot_1629234687.png" width="300"
+<img src = "https://github.com/complextheory/MarvelAvengers/blob/master/app/src/main/res/drawable/Screenshot_1629234687.png" width="250"
 height="500">
-<img src = "https://github.com/complextheory/MarvelAvengers/blob/master/app/src/main/res/drawable/Screenshot_1629234510.png" width="300"
+<img src = "https://github.com/complextheory/MarvelAvengers/blob/master/app/src/main/res/drawable/Screenshot_1629234510.png" width="250"
 height="500">
-<img src = "https://github.com/complextheory/MarvelAvengers/blob/master/app/src/main/res/drawable/Screenshot_1629234525.png" width="300"
+<img src = "https://github.com/complextheory/MarvelAvengers/blob/master/app/src/main/res/drawable/Screenshot_1629234525.png" width="250"
 height="500">                                                                                                                               
                                                                                                                                     
                                                                                                                                                                   
