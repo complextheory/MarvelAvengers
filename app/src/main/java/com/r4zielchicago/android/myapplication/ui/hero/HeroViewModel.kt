@@ -6,11 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.r4zielchicago.android.myapplication.api.entity.heroes.Hero
 import com.r4zielchicago.android.myapplication.repository.HeroRepository
+import com.r4zielchicago.android.myapplication.utilities.SharedPrefsUtil
+import com.r4zielchicago.android.myapplication.utilities.heroKey
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.plugins.RxJavaPlugins.onError
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class HeroViewModel(private val heroRepository: HeroRepository) : ViewModel() {
+class HeroViewModel(private val heroRepository: HeroRepository, private val prefsUtil: SharedPrefsUtil) : ViewModel() {
 
     val heroLiveData = MutableLiveData<List<Hero>>()
     val tempHeroListLiveData = MutableLiveData<List<Hero>>()
@@ -30,8 +32,9 @@ class HeroViewModel(private val heroRepository: HeroRepository) : ViewModel() {
                     heroList.addAll(heroes)
                 },
                 {
-                    heroLiveData.value = emptyList()
-                    tempHeroListLiveData.value = emptyList()
+                    heroLiveData.value = prefsUtil.getFromPrefs(heroKey)
+                    Log.e("From Hero ViewModel", "Get Heroes Failed")
+                    tempHeroListLiveData.value = prefsUtil.getFromPrefs(heroKey)
                     heroList.clear()
                     onError(it)
                 }

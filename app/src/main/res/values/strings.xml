@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="attribution_text">Data provided by Marvel. © 2014 Marvel</string>
-    <string name="shared_prefs_heroes_json_key">heroes_json</string>
+    <string name="shared_prefs_heroes_json_key">LIST</string>
 </resources>

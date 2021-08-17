@@ -7,6 +7,8 @@ import com.google.gson.Gson
 import com.r4zielchicago.android.myapplication.api.MarvelApi
 import com.r4zielchicago.android.myapplication.network.NetworkService
 import com.r4zielchicago.android.myapplication.utilities.NavControllerUtil
+import com.r4zielchicago.android.myapplication.utilities.SharedPrefsUtil
+import com.r4zielchicago.android.myapplication.utilities.SharedPrefsUtilImpl
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
@@ -16,19 +18,13 @@ val appModule = module {
     val retrofit = networkService.getRetrofitInstance()
     val marvelApi = retrofit.create(MarvelApi::class.java)
     val navControllerUtil = NavControllerUtil()
-    val gson = Gson()
 
-    fun provideGson() = gson
     fun provideMarvelApi() = marvelApi
     fun provideNavControllerUtil() = navControllerUtil
-    fun provideSharedPrefs(app: Application): SharedPreferences {
-        return app.applicationContext.getSharedPreferences(
-            "MARVEL_SHARED_PREFS",
-            Context.MODE_PRIVATE
-        )
+    fun provideSharedPrefs(app: Application): SharedPrefsUtil {
+        return SharedPrefsUtilImpl(app)
     }
 
-    single { provideGson() }
     single { provideMarvelApi() }
     single { provideNavControllerUtil() }
     single { provideSharedPrefs(androidApplication())}
