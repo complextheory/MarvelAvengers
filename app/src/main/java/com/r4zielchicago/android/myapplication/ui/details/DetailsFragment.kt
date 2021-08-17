@@ -5,7 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
 import com.r4zielchicago.android.myapplication.databinding.FragmentDetailsBinding
 import com.r4zielchicago.android.myapplication.ui.details.adapter.DetailsTabAdapter
 import com.r4zielchicago.android.myapplication.ui.details.viewModel.DetailsViewModel
@@ -19,6 +20,8 @@ class DetailsFragment: Fragment() {
 
     private lateinit var tabAdapter: DetailsTabAdapter
 
+    private enum class TITLES {Comics, Series, Events}
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,26 +30,19 @@ class DetailsFragment: Fragment() {
 
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
 
+        tabAdapter = DetailsTabAdapter(requireActivity())
 
-        tabAdapter = DetailsTabAdapter(requireActivity().supportFragmentManager)
+        binding.tabViewpager.adapter = tabAdapter
 
         setupViewPager(binding.tabViewpager)
-
-        // If we dont use setupWithViewPager() method then
-        // tabs are not used or shown when activity opened
-        binding.tabTablayout.setupWithViewPager(binding.tabViewpager)
 
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        observeViewModel()
-    }
-
     override fun onResume() {
         super.onResume()
-        viewModel.fetchData()
+        viewModel.observeAndFetchData()
+        observeViewModel()
     }
 
     override fun onStop() {
@@ -58,13 +54,30 @@ class DetailsFragment: Fragment() {
 
     // This function is used to add items in arraylist and assign
     // the adapter to view pager
-    private fun setupViewPager(viewpager: ViewPager) {
+    private fun setupViewPager(viewPager: ViewPager2) {
 
-        tabAdapter.addFragment(ComicsFragment(), "Comics")
-        tabAdapter.addFragment(SeriesFragment(), "Series")
-        tabAdapter.addFragment(EventsFragment(), "Events")
+        tabAdapter.addFragment(ComicsFragment())
+        tabAdapter.addFragment(SeriesFragment())
+        tabAdapter.addFragment(EventsFragment())
 
-        viewpager.adapter = tabAdapter
+        viewPager.orientation = (ViewPager2.ORIENTATION_HORIZONTAL)
+        viewPager.adapter = tabAdapter
+
+        TabLayoutMediator(binding.tabLayout, binding.tabViewpager) { tab, position ->
+
+            when(position){
+                TITLES.Comics.ordinal -> {
+                    tab.text = TITLES.Comics.name
+                }
+                TITLES.Series.ordinal -> {
+                    tab.text = TITLES.Series.name
+                }
+                TITLES.Events.ordinal -> {
+                    tab.text = TITLES.Events.name
+                }
+            }
+
+        }.attach()
     }
 
     private fun observeViewModel() {

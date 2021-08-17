@@ -20,7 +20,7 @@ class RVAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     enum class DataTypes {Comics, Series, Events}
 
-    fun updateComics(data: List<Comic>){
+    fun update(data: List<Comic>){
         comics.clear()
         comics.addAll(data)
         notifyDataSetChanged()

@@ -23,7 +23,7 @@ class DetailsViewModel(
     val seriesLiveData = MutableLiveData<List<Series>>()
     val eventsLiveData = MutableLiveData<List<MarvelEvent>>()
 
-    fun observeLiveData() {
+    fun observeAndFetchData() {
 
         fetchData()
             .subscribeOn(Schedulers.io())
@@ -46,13 +46,9 @@ class DetailsViewModel(
 
     fun fetchData(): Observable<LocalDetails> {
         return Observable.zip(
-            detailsRepository.getComics(),
-            detailsRepository.getSeries(),
-            detailsRepository.getEvents(),
-            {c, s, e -> convert(c, s, e)})
-    }
-
-    private fun convert(comics: ComicResult, series: SeriesResult, events: EventResult): LocalDetails? {
-        return LocalDetails(comics, series, events)
+            detailsRepository.getComics().subscribeOn(Schedulers.io()),
+            detailsRepository.getSeries().subscribeOn(Schedulers.io()),
+            detailsRepository.getEvents().subscribeOn(Schedulers.io()),
+            {c, s, e -> LocalDetails(c, s, e)})
     }
 }

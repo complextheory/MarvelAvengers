@@ -18,7 +18,7 @@
             <!-- tablayout which contains which is
                  important to show tabs -->
             <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_tablayout"
+                android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabIndicatorColor="#FFF"
@@ -28,7 +28,7 @@
 
         <!-- view pager is used to open other fragment by using
              left or right swip-->
-        <androidx.viewpager.widget.ViewPager
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/tab_viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -11,13 +11,18 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
+import com.google.gson.reflect.TypeToken
 import com.r4zielchicago.android.myapplication.R
-import com.r4zielchicago.android.myapplication.api.entity.heroes.HeroData
 import com.r4zielchicago.android.myapplication.api.entity.heroes.Hero
+import com.r4zielchicago.android.myapplication.api.entity.heroes.HeroData
+import com.r4zielchicago.android.myapplication.api.entity.heroes.HeroResult
 import com.r4zielchicago.android.myapplication.databinding.FragmentHeroBinding
 import com.r4zielchicago.android.myapplication.utilities.HeroClickListener
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.lang.reflect.Type
+
 
 class HeroFragment: Fragment() {
 
@@ -60,13 +65,14 @@ class HeroFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
+        viewModel.fetchHeroes()
 
-        if (checkSharedPrefs() == null) {
-            viewModel.fetchHeroes()
-        } else {
-            val heroes = sharedPreferences.getString("hero_json", null)
-            viewModel.heroLiveData.value = gson.fromJson(heroes, HeroData::class.java).heroes
-        }
+//        if (checkSharedPrefs() == null) {
+//            viewModel.fetchHeroes()
+//        } else {
+//            val heroes = sharedPreferences.getString("hero_json", null)
+//            viewModel.heroLiveData.value = gson.fromJson(heroes, HeroData::class.java).heroes
+//        }
         observeViewModel()
     }
 
@@ -104,11 +110,22 @@ class HeroFragment: Fragment() {
         })
     }
 
-    private fun checkSharedPrefs(): HeroData? {
-
-        val heroes = sharedPreferences.getString("heroes_json", null)
-        return gson.fromJson(heroes, HeroData::class.java)?: null
-    }
+//    private fun checkSharedPrefs(): Collection<HeroResult>? {
+//
+//        try {
+//            val heroes = sharedPreferences.getString("heroes_json", null)
+//            val collectionType: Type = object : TypeToken<Collection<HeroResult?>?>() {}.type
+//            val lcs: List<HeroResult> = Gson()
+//                .fromJson(heroes, collectionType) as List<HeroResult>
+//            val enums: Collection<HeroResult> = gson.fromJson(heroes, collectionType)
+//            return lcs ?: null
+//
+//        }catch (exception: JsonSyntaxException){
+//            throw exception
+//        }
+//
+////        return gson.fromJson(heroes, HeroData::class.java)?: null
+//    }
 
     private fun performSearch() {
         binding.characterSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

@@ -38,9 +38,7 @@ class ComicsFragment: Fragment() {
     private fun observeViewModel() {
         viewModel.comicLiveData.observe(viewLifecycleOwner, {
             it?.let { heroes ->
-
-                rvAdapter.updateComics(heroes)
-
+                rvAdapter.update(heroes)
             }
         })
     }
